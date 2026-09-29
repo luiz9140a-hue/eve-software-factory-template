@@ -1,39 +1,29 @@
 {
-  "name": "eve-software-factory-template",
-  "version": "0.0.0",
+  "name": "site",
   "private": true,
-  "description": "Foreman, the eve Software Factory.",
-  "license": "MIT",
+  "version": "0.0.0",
   "type": "module",
-  "imports": {
-    "#*": "./agent/*",
-    "#evals/*": "./evals/*"
-  },
   "scripts": {
-    "build": "eve build",
-    "check": "ultracite check",
-    "dev": "eve dev",
-    "eval": "eve eval",
-    "fix": "ultracite fix",
-    "start": "eve start",
-    "typecheck": "tsc",
-    "validate": "pnpm run check && pnpm run typecheck && eve info"
+    "dev": "vite --host 0.0.0.0 --port ${PORT:-5173}",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@github-tools/eve-extension": "^0.3.2",
-    "@vercel/blob": "^2.8.0",
-    "@vercel/connect": "0.8.0",
-    "ai": "^7.0.70",
-    "eve": "^0.39.3",
-    "zod": "4.4.3"
+    "@clerk/clerk-react": "^5.61.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.9",
-    "@types/node": "~24.13.3",
-    "typescript": "7.0.2",
-    "ultracite": "^7.10.5"
-  },
-  "engines": {
-    "node": "24.x"
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
   }
 }
