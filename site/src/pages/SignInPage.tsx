@@ -1,15 +1,11 @@
 import { SignIn } from '@clerk/clerk-react'
 import { Link, Navigate } from 'react-router-dom'
-import LoginUnavailable from '@/components/LoginUnavailable'
+import DemoLogin from '@/components/DemoLogin'
 import { clerkEnabled } from '@/lib/clerk-enabled'
 import { useAppAuth } from '@/lib/app-auth-context'
 
 export default function SignInPage() {
   const { isSignedIn } = useAppAuth()
-
-  if (!clerkEnabled) {
-    return <LoginUnavailable />
-  }
 
   if (isSignedIn) {
     return <Navigate to="/painel" replace />
@@ -32,15 +28,15 @@ export default function SignInPage() {
             <h1 className="font-display text-2xl font-bold text-ink-900">Bem-vindo de volta</h1>
             <p className="mt-2 text-sm text-ink-500">Entre com seu e-mail e senha para acessar o painel.</p>
           </div>
-          <div className="clerk-localized rounded-2xl border border-ink-100 bg-white p-6 shadow-sm sm:p-8">
-            <SignIn signUpUrl="/criar-conta" fallbackRedirectUrl="/painel" forceRedirectUrl="/painel" />
+          <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-sm sm:p-8">
+            {clerkEnabled ? (
+              <div className="clerk-localized">
+                <SignIn signUpUrl="/criar-conta" fallbackRedirectUrl="/painel" forceRedirectUrl="/painel" />
+              </div>
+            ) : (
+              <DemoLogin mode="signin" />
+            )}
           </div>
-          <p className="mt-6 text-center text-sm text-ink-500">
-            Ainda não tem conta?{' '}
-            <Link to="/criar-conta" className="font-semibold text-brand-600 hover:text-brand-700">
-              Criar conta grátis
-            </Link>
-          </p>
         </div>
       </main>
     </div>
